@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friends New Year Wishes</title>
+  <link rel="stylesheet" href="../css/ny.css">
+  <style>
+    .message-box {
+      margin-top: 20px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #e5e7eb;
+      text-align: center;
+    }
+    .chaotic-box {
+      position: relative;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      touch-action: manipulation; /* Prevents zooming/scrolling lag on mobile */
+    }
+    #claimBtn {
+      position: relative;
+      transition: all 0.1s ease;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .error-msg {
+      color: #fca5a5;
+      font-size: 0.85rem;
+      margin-top: 15px;
+      min-height: 24px;
+      font-style: italic;
+      text-align: center;
+    }
+    .wish-list {
+      text-align: left;
+      margin: 15px 0;
+      padding-left: 20px;
+      color: #fca5a5;
+    }
+    .wish-list li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header">
+        <h1>✨ Questionable Wishes ✨</h1>
+        <p>Brace yourself, <span id="displayName">Friend</span>...</p>
+      </div>
+
+      <!-- Locked State with Frustrating Mechanics -->
+      <div id="lockedState" class="chaotic-box">
+        <p>Your official New Year wish is locked behind a totally legitimate verification process.</p>
+        <button id="claimBtn" style="margin-top: 20px;">Claim Wish 🎁</button>
+        <div id="errorText" class="error-msg"></div>
+      </div>
+
+      <!-- Unlocked Chaotic Wishes -->
+      <div id="unlockedState" class="message-box" style="display: none;">
+        <p>My chaotic wishes for you this year:</p>
+        <ul class="wish-list">
+          <li>💥 May your Wi-Fi drop during important moments</li>
+          <li>💸 May you buy things you don't need at 3 AM</li>
+          <li>🍕 May your diet start "tomorrow" for the 365th time</li>
+          <li>🤡 May you continue making terrible decisions so I look smart</li>
+        </ul>
+        <div style="margin-top: 20px; color: #ffd700; font-weight: bold;">Good luck surviving this year! 💀</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userName = localStorage.getItem('nyCard_userName') || 'Friend';
+      document.getElementById('displayName').textContent = userName;
+
+      const claimBtn = document.getElementById('claimBtn');
+      const errorText = document.getElementById('errorText');
+      const lockedState = document.getElementById('lockedState');
+      const unlockedState = document.getElementById('unlockedState');
+
+      let clickCount = 0;
+      const annoyingMessages = [
+        "Error: Button too fast for you.",
+        "Access Denied: Are you even trying?",
+        "System lag detected... Try again.",
+        "Nice try, click it again.",
+        "Task failed successfully.",
+        "Nope! Catch me if you can."
+      ];
+
+      function dodgeButton() {
+        if (clickCount < 6) {
+          errorText.textContent = annoyingMessages[Math.floor(Math.random() * annoyingMessages.length)];
+          const randomX = (Math.random() - 0.5) * 240;
+          const randomY = (Math.random() - 0.5) * 130;
+          claimBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+      }
+
+      // Desktop hover event
+      claimBtn.addEventListener('mouseover', () => {
+        if (clickCount < 6) {
+          const randomX = (Math.random() - 0.5) * 220;
+          const randomY = (Math.random() - 0.5) * 120;
+          claimBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+      });
+
+      // Mobile touch event (dodges the second their thumb touches it!)
+      claimBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Prevents instant click so it successfully runs away on phones
+        if (clickCount < 6) {
+          clickCount++;
+          dodgeButton();
+          if (clickCount >= 6) {
+            lockedState.style.display = 'none';
+            unlockedState.style.display = 'block';
+          }
+        }
+      }, { passive: false });
+
+      // Desktop click event
+      claimBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (clickCount < 6) {
+          clickCount++;
+          dodgeButton();
+        } else {
+          lockedState.style.display = 'none';
+          unlockedState.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

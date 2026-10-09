@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Year Card</title>
+  <link rel="stylesheet" href="./css/ny.css">
+</head>
+<body>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header">
+        <h1>✨ Happy New Year ✨</h1>
+        <p>Fill in the details to create your card.</p>
+      </div>
+
+      <form id="nyForm">
+        <div class="input-group">
+          <label for="currentDate">Date</label>
+          <input type="text" id="currentDate" readonly>
+        </div>
+
+        <div class="input-group">
+          <label for="userName">Your Name</label>
+          <input type="text" id="userName" placeholder="Enter your name" autocomplete="off">
+        </div>
+
+        <div class="input-group">
+          <label for="relation">Send To (Relation)</label>
+          <select id="relation">
+            <option value="" disabled selected>Select a relation...</option>
+            <option value="family">Family</option>
+            <option value="friends">Friends</option>
+            <option value="secret">Secret</option>
+          </select>
+        </div>
+
+        <!-- Hidden by default, shown only when 'Secret' is selected -->
+        <div class="input-group" id="passwordGroup" style="display: none;">
+          <label for="secretPassword">Secret Password</label>
+          <input type="password" id="secretPassword" placeholder="Enter password">
+        </div>
+
+        <button type="submit" id="submitBtn">Generate Card 🎉</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CUSTOM CREEPY POP-UP MODAL (For Empty Fields) -->
+  <div id="creepyModal" class="creepy-modal">
+    <div class="creepy-modal-content">
+      <span class="close-btn" id="closeCreepy">&times;</span>
+      <h2>who are you?</h2>
+    </div>
+  </div>
+
+  <!-- CUSTOM MELLOW POP-UP MODAL (For Wrong Password) -->
+  <div id="mellowModal" class="mellow-modal">
+    <div class="mellow-modal-content">
+      <span class="close-btn mellow-close" id="closeMellow">&times;</span>
+      <h2>Oops, that's not quite right</h2>
+      <p>Take a deep breath and try again.</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const dateInput = document.getElementById('currentDate');
+      const relationSelect = document.getElementById('relation');
+      const passwordGroup = document.getElementById('passwordGroup');
+      const passwordInput = document.getElementById('secretPassword');
+      const nyForm = document.getElementById('nyForm');
+      
+      // Modal elements
+      const creepyModal = document.getElementById('creepyModal');
+      const mellowModal = document.getElementById('mellowModal');
+      const closeCreepy = document.getElementById('closeCreepy');
+      const closeMellow = document.getElementById('closeMellow');
+
+      // 1. Auto-set current date
+      const today = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      dateInput.value = today.toLocaleDateString('en-US', options);
+
+      // 2. Handle Relation change (Show/Hide Password)
+      relationSelect.addEventListener('change', (e) => {
+        if (e.target.value === 'secret') {
+          passwordGroup.style.display = 'flex';
+          passwordInput.required = true;
+        } else {
+          passwordGroup.style.display = 'none';
+          passwordInput.required = false;
+          passwordInput.value = ''; // clear password if they switch away
+        }
+      });
+
+      // Close modal logic for both modals
+      closeCreepy.onclick = () => creepyModal.style.display = "none";
+      closeMellow.onclick = () => mellowModal.style.display = "none";
+      
+      window.onclick = function(event) {
+        if (event.target == creepyModal) {
+          creepyModal.style.display = "none";
+        }
+        if (event.target == mellowModal) {
+          mellowModal.style.display = "none";
+        }
+      }
+
+      // 3. Form Submission
+      nyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const userName = document.getElementById('userName').value.trim();
+        const relation = relationSelect.value;
+        const password = passwordInput.value;
+
+        // Custom validation check: trigger custom creepy modal if empty
+        if (!userName || !relation) {
+          creepyModal.style.display = "flex";
+          return; // Stop submission
+        }
+
+        // --- CHANGE YOUR MANUAL PASSWORD HERE ---
+        const SECRET_PASSWORD = "ILY"; // Change this to your desired password
+        // ----------------------------------------
+
+        // Custom validation check: trigger mellow modal if password is wrong
+        if (relation === 'secret' && password !== SECRET_PASSWORD) {
+          mellowModal.style.display = "flex";
+          return; // Stop submission
+        }
+
+        // Store user inputs in localStorage
+        localStorage.setItem('nyCard_userName', userName);
+        localStorage.setItem('nyCard_date', dateInput.value);
+        localStorage.setItem('nyCard_relation', relation);
+
+        // --- CONDITIONAL REDIRECTION BASED ON RELATION ---
+        if (relation === 'family') {
+          window.location.href = 'pages/readyfl.html';
+        } else if (relation === 'friends') {
+          window.location.href = 'pages/readyfr.html';
+        } else if (relation === 'secret') {
+          window.location.href = 'Ayane/specialready.html'; 
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family New Year Card</title>
+  <link rel="stylesheet" href="../css/ny.css">
+  <style>
+    .message-box {
+      margin-top: 20px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #e5e7eb;
+      text-align: center;
+    }
+    .signature {
+      margin-top: 25px;
+      color: #ffd700;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header">
+        <h1>✨ A Year Well Shared ✨</h1>
+        <p>Dear <span id="displayName">Family</span>,</p>
+      </div>
+
+      <div class="message-box">
+        <p>As we look back at the past year, I just want to express my deepest gratitude. Making it through everything together—sharing the laughs, the challenges, and the quiet moments—means the world.</p>
+        <p style="margin-top: 15px;">Here’s to another year of health, warmth, and making beautiful memories side by side.</p>
+        <div class="signature">Happy New Year! ❤️</div>
+        
+        <!-- Next Button added here -->
+        <button id="nextBtn" style="margin-top: 25px;">Next ➡️</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userName = localStorage.getItem('nyCard_userName') || 'Family';
+      document.getElementById('displayName').textContent = userName;
+
+      // Next button redirection
+      const nextBtn = document.getElementById('nextBtn');
+      nextBtn.addEventListener('click', () => {
+        window.location.href = 'page3FL.html';
+      });
+    });
+  </script>
+</body>
+</html>

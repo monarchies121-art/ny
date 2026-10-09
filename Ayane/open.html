@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Letters - Ayane</title>
+  <link rel="stylesheet" href="../css/ny.css">
+  <style>
+    .mood-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .mood-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: 12px;
+      padding: 15px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 85px;
+    }
+    .mood-card:hover {
+      background: rgba(255, 215, 0, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+    }
+    .mood-card.mystery {
+      grid-column: span 2;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 0, 0.15));
+      border: 1px dashed #ffd700;
+    }
+    .mood-icon {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+    .mood-title {
+      font-size: 0.85rem;
+      color: #ffd700;
+      font-weight: bold;
+    }
+
+    /* Modal styling */
+    .letter-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+    .letter-content {
+      background: #0f172a;
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+    }
+    .letter-content h3 {
+      color: #ffd700;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+    .letter-body {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #e5e7eb;
+      margin-bottom: 25px;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 3px solid #ffd700;
+    }
+    .close-btn {
+      background: linear-gradient(135deg, #ffd700, #ff8c00);
+      color: #0f172a;
+      border: none;
+      padding: 10px 25px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .nav-actions {
+      margin-top: 25px;
+      text-align: center;
+    }
+    .home-btn {
+      background: rgba(255, 215, 0, 0.15);
+      color: #ffd700;
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .home-btn:hover {
+      background: rgba(255, 215, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container" style="max-width: 480px;">
+    <div class="card">
+      <div class="card-header" style="margin-bottom: 10px;">
+        <h1>✨ Choose a Letter ✨</h1>
+        <p>Pick how you're feeling or open a surprise</p>
+      </div>
+
+      <div class="mood-grid">
+        <div class="mood-card" data-key="sad">
+          <div class="mood-icon">🌧️</div>
+          <div class="mood-title">When You're Sad</div>
+        </div>
+        <div class="mood-card" data-key="happy">
+          <div class="mood-icon">☀️</div>
+          <div class="mood-title">When You're Happy</div>
+        </div>
+        <div class="mood-card" data-key="uncertain">
+          <div class="mood-icon">🧭</div>
+          <div class="mood-title">When You're Uncertain</div>
+        </div>
+        <div class="mood-card" data-key="surprise">
+          <div class="mood-icon">🎁</div>
+          <div class="mood-title">A Quick Surprise</div>
+        </div>
+        <div class="mood-card mystery" data-key="mystery">
+          <div class="mood-icon">🔐</div>
+          <div class="mood-title">The Mystery Letter ✨</div>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <button id="homeBtn" class="home-btn">🏠 Back to Home</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Letter Content -->
+  <div id="letterModal" class="letter-modal">
+    <div class="letter-content">
+      <h3 id="modalTitle">Title</h3>
+      <div id="modalBody" class="letter-body">Message goes here...</div>
+      <button id="closeModalBtn" class="close-btn">Keep in Heart 🤍</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const letters = {
+        sad: {
+          title: "When You're Feeling Sad 🌧️",
+          text: "I wish I could give you a massive hug right this second. It's completely okay to have heavy days—you don't have to carry everything by yourself. Take all the time you need to breathe, rest, and know that brighter days are ahead. I'm always rooting for you."
+        },
+        happy: {
+          title: "When You're Feeling Happy ☀️",
+          text: "Your happiness is literally the best thing ever. Seeing you smile or hearing about your good moments makes everything brighter. Soak up this joy and celebrate yourself—you've earned every bit of it!"
+        },
+        uncertain: {
+          title: "When You're Uncertain 🧭",
+          text: "Not knowing what comes next can be scary, but remember that you don't have to figure out the whole future today. Just take one small step forward. You have incredible instincts, and everything is going to work out fine."
+        },
+        surprise: {
+          title: "A Quick Surprise! 🎁",
+          text: "SURPRISE! Just in case nobody reminded you today: you are uniquely brilliant, genuinely kind, and wonderfully irreplaceable. Don't ever forget how much light you bring into people's lives!"
+        },
+        mystery: {
+          title: "The Mystery Letter ✨",
+          text: "You unlocked the secret envelope! If you're reading this, it means you completed the entire journey. Out of all paths and possibilities, I'm so glad our paths crossed. May this new year bring you magic, peace, and endless reasons to smile. Let's make it a great one!"
+        }
+      };
+
+      const cards = document.querySelectorAll('.mood-card');
+      const modal = document.getElementById('letterModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const homeBtn = document.getElementById('homeBtn');
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          const key = card.getAttribute('data-key');
+          if (letters[key]) {
+            modalTitle.textContent = letters[key].title;
+            modalBody.textContent = letters[key].text;
+            modal.style.display = 'flex';
+          }
+        });
+      });
+
+      closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+
+      homeBtn.addEventListener('click', () => {
+        window.location.href = '../index.html';
+      });
+    });
+  </script>
+</body>
+</html>

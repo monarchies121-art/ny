@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family New Year Video</title>
+  <link rel="stylesheet" href="../css/ny.css">
+  <style>
+    .video-container {
+      margin-top: 15px;
+      width: 100%;
+      height: 240px; /* Fixed landscape height constraint */
+      background: #000000;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Keeps video proportions safe */
+      display: block;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container" style="max-width: 450px;">
+    <div class="card">
+      <div class="card-header">
+        <h1>✨ Family Celebration ✨</h1>
+        <p>A special moment captured for us, <span id="displayName">Family</span>.</p>
+      </div>
+
+      <div class="video-container">
+        <video controls autoplay muted loop>
+          <source src="../model/ny.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- Next Button is now fully accessible -->
+      <button id="nextBtn" style="margin-top: 20px;">Next ➡️</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userName = localStorage.getItem('nyCard_userName') || 'Family';
+      document.getElementById('displayName').textContent = userName;
+
+      const nextBtn = document.getElementById('nextBtn');
+      nextBtn.addEventListener('click', () => {
+        window.location.href = 'page4FL.html';
+      });
+    });
+  </script>
+</body>
+</html>

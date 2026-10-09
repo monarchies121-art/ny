@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friends New Year Card</title>
+  <link rel="stylesheet" href="../css/ny.css">
+  <style>
+    .button-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    /* Custom pop-up for the "No" response */
+    .loss-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .loss-modal-content {
+      background: #0f172a;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      padding: 40px 60px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .loss-modal-content h2 {
+      font-family: 'Poppins', sans-serif;
+      color: #ffd700;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .loss-modal-content button {
+      width: auto;
+      padding: 10px 25px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header">
+        <h1>✨ Happy New Year, <span id="displayName">Friend</span>! ✨</h1>
+        <p>Ready to make this year unforgettable?</p>
+      </div>
+
+      <div class="button-group">
+        <button id="yesBtn">Yes! 🎉</button>
+        <button id="noBtn">No 😢</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- "FINE YOUR LOSS" POP-UP MODAL -->
+  <div id="lossModal" class="loss-modal">
+    <div class="loss-modal-content">
+      <h2>fine your loss</h2>
+      <button id="exitBtn">Okay, goodbye</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Retrieve stored user name
+      const userName = localStorage.getItem('nyCard_userName') || 'Friend';
+      document.getElementById('displayName').textContent = userName;
+
+      const yesBtn = document.getElementById('yesBtn');
+      const noBtn = document.getElementById('noBtn');
+      const lossModal = document.getElementById('lossModal');
+      const exitBtn = document.getElementById('exitBtn');
+
+      // Yes button redirects to friends page 2
+      yesBtn.addEventListener('click', () => {
+        window.location.href = 'page2FR.html';
+      });
+
+      // No button instantly triggers the pop-up
+      noBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        lossModal.style.display = 'flex';
+      });
+
+      // When they click the button inside the pop-up, forcefully close/exit the page
+      exitBtn.addEventListener('click', () => {
+        // Attempt to close window (Note: browsers only allow closing scripts-opened windows)
+        window.close();
+        
+        // Fallback: If browser blocks window.close(), redirect to a blank black screen or about:blank
+        setTimeout(() => {
+          window.location.href = 'about:blank';
+        }, 100);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special New Year Video - Ayane</title>
+  <link rel="stylesheet" href="../css/ny.css">
+  <style>
+    .video-container {
+      margin-top: 15px;
+      width: 100%;
+      height: 240px;
+      background: #000000;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      outline: none;
+    }
+    .heart-btn {
+      background: linear-gradient(135deg, #ffd700, #ff8c00);
+      color: #0f172a;
+      border: none;
+      padding: 10px 24px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-top: 20px;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+    .heart-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container" style="max-width: 450px;">
+    <div class="card">
+      <div class="card-header">
+        <h1>✨ Special New Year Video ✨</h1>
+        <p>Just for you, Ayane ❤️</p>
+      </div>
+
+      <div class="video-container">
+        <video controls autoplay muted loop>
+          <source src="../model/ILY.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- Redirects to the new open.html page -->
+      <button id="nextBtn" class="heart-btn">Next: Open When & Letters 💌</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const nextBtn = document.getElementById('nextBtn');
+      nextBtn.addEventListener('click', () => {
+        window.location.href = 'open.html';
+      });
+    });
+  </script>
+</body>
+</html>

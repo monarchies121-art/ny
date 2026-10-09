@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friends New Year Card</title>
+  <link rel="stylesheet" href="../css/ny.css">
+  <style>
+    .message-box {
+      margin-top: 20px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #e5e7eb;
+      text-align: center;
+    }
+    .signature {
+      margin-top: 25px;
+      color: #ffd700;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .mock-text {
+      font-style: italic;
+      color: #fca5a5;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header">
+        <h1>✨ Cheers to Survival ✨</h1>
+        <p>Hey <span id="displayName">Friend</span>...</p>
+      </div>
+
+      <!-- State 1: Mocking section -->
+      <div id="mockSection" class="message-box">
+        <p class="mock-text">"Honestly, it’s an absolute miracle you made it through this past year without completely losing your mind (or your keys)."</p>
+        <p style="margin-top: 15px;">Can't believe you actually survived another 365 days of questionable life choices.</p>
+        <button id="revealBtn" style="margin-top: 25px;">Okay, what's the real message? 🙄</button>
+      </div>
+
+      <!-- State 2: Gratitude section (hidden initially) -->
+      <div id="gratitudeSection" class="message-box" style="display: none;">
+        <p>All jokes aside... I am truly grateful for your friendship and that we both made it to this new year together.</p>
+        <p style="margin-top: 15px;">Thank you for all the laughs, the chaos, and sticking around. Here’s to making even more unforgettable memories!</p>
+        <div class="signature">Happy New Year! 🥂</div>
+        
+        <!-- Next Button added here -->
+        <button id="nextBtn" style="margin-top: 25px;">Next ➡️</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userName = localStorage.getItem('nyCard_userName') || 'Friend';
+      document.getElementById('displayName').textContent = userName;
+
+      const mockSection = document.getElementById('mockSection');
+      const gratitudeSection = document.getElementById('gratitudeSection');
+      const revealBtn = document.getElementById('revealBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      revealBtn.addEventListener('click', () => {
+        mockSection.style.display = 'none';
+        gratitudeSection.style.display = 'block';
+      });
+
+      // Next button redirection to page3FR.html
+      nextBtn.addEventListener('click', () => {
+        window.location.href = 'page3FR.html';
+      });
+    });
+  </script>
+</body>
+</html>

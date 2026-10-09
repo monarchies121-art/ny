@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special New Year Card - Ayane</title>
+  <link rel="stylesheet" href="../css/ny.css">
+  <style>
+    /* Full-screen fireworks canvas background */
+    #fireworksCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    /* Ensure card sits above the fireworks canvas */
+    .card-container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .secret-box {
+      margin-top: 25px;
+      text-align: center;
+    }
+    .heart-btn {
+      background: linear-gradient(135deg, #ffd700, #ff8c00);
+      color: #0f172a;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .heart-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+    }
+    .hidden-message {
+      display: none;
+      margin-top: 20px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #e5e7eb;
+      animation: fadeIn 0.8s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .signature {
+      margin-top: 20px;
+      color: #ffd700;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fireworks Background Canvas -->
+  <canvas id="fireworksCanvas"></canvas>
+
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header">
+        <h1>✨ A Secret Just For You ✨</h1>
+        <p>Dearest Ayane (sent with love by <span id="senderName">Someone Special</span>)</p>
+      </div>
+
+      <div class="secret-box">
+        <p>You unlocked the secret door. Out of all the paths, this one is entirely yours.</p>
+        
+        <!-- Interactive Reveal Button -->
+        <button id="revealSecretBtn" class="heart-btn" style="margin-top: 25px;">Tap to Open 💖</button>
+
+        <!-- Hidden Secret Message -->
+        <div id="secretMessage" class="hidden-message">
+          <p>Out of all 365 days in the year, having you crossing path with my life is the greatest gift of all. Thank you for every smile, every shared moment, and for making my world infinitely brighter.</p>
+          <p style="margin-top: 15px;">May this new year bring you all the happiness, love, and dreams your heart holds.</p>
+          <div class="signature">Forever yours, Happy New Year! ❤️</div>
+          
+          <!-- Next Button to the 100-item slide list -->
+          <button id="nextToListBtn" class="heart-btn" style="margin-top: 25px; padding: 10px 24px; font-size: 0.9rem;">Next: 100 Things About You ➡️</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const senderName = localStorage.getItem('nyCard_userName') || 'Someone Special';
+      document.getElementById('senderName').textContent = senderName;
+
+      const revealBtn = document.getElementById('revealSecretBtn');
+      const secretMessage = document.getElementById('secretMessage');
+      const nextToListBtn = document.getElementById('nextToListBtn');
+
+      revealBtn.addEventListener('click', () => {
+        revealBtn.style.display = 'none';
+        secretMessage.style.display = 'block';
+      });
+
+      nextToListBtn.addEventListener('click', () => {
+        window.location.href = 'list.html';
+      });
+
+      // --- FIREWORKS ANIMATION SCRIPT ---
+      const canvas = document.getElementById('fireworksCanvas');
+      const ctx = canvas.getContext('2d');
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      class Particle {
+        constructor(x, y, color) {
+          this.x = x;
+          this.y = y;
+          this.color = color;
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 5 + 2;
+          this.vx = Math.cos(angle) * speed;
+          this.vy = Math.sin(angle) * speed;
+          this.alpha = 1;
+          this.decay = Math.random() * 0.015 + 0.01;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.vy += 0.08; // gravity
+          this.alpha -= this.decay;
+        }
+        draw() {
+          ctx.save();
+          ctx.globalAlpha = this.alpha;
+          ctx.fillStyle = this.color;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      class Firework {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = canvas.height;
+          this.targetY = Math.random() * (canvas.height * 0.5);
+          this.speed = Math.random() * 3 + 4;
+          this.angle = -Math.PI / 2 + (Math.random() - 0.5) * 0.2;
+          this.vx = Math.cos(this.angle) * this.speed;
+          this.vy = Math.sin(this.angle) * this.speed;
+          this.exploded = false;
+          this.particles = [];
+          const colors = ['#ffd700', '#ff8c00', '#ff4500', '#ff69b4', '#00ffff', '#ffffff'];
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+        }
+        update() {
+          if (!this.exploded) {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.y <= this.targetY) {
+              this.exploded = true;
+              for (let i = 0; i < 50; i++) {
+                this.particles.push(new Particle(this.x, this.y, this.color));
+              }
+            }
+          } else {
+            this.particles.forEach(p => p.update());
+            this.particles = this.particles.filter(p => p.alpha > 0);
+          }
+        }
+        draw() {
+          if (!this.exploded) {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            this.particles.forEach(p => p.draw());
+          }
+        }
+      }
+
+      let fireworks = [];
+      function animate() {
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.2)'; // trail effect
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (Math.random() < 0.04) {
+          fireworks.push(new Firework());
+        }
+
+        fireworks.forEach(fw => {
+          fw.update();
+          fw.draw();
+        });
+
+        fireworks = fireworks.filter(fw => fw.exploded && fw.particles.length === 0 ? false : true);
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    });
+  </script>
+</body>
+</html>

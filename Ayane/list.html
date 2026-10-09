@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100 Things About Ayane</title>
+  <link rel="stylesheet" href="../css/ny.css">
+  <style>
+    .slide-container {
+      margin-top: 15px;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .slide {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .slide.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide h3 {
+      color: #ffd700;
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .trait-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      font-size: 0.86rem;
+      line-height: 1.45;
+      color: #e5e7eb;
+    }
+    .trait-list li {
+      margin-bottom: 5px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 5px 10px;
+      border-radius: 6px;
+      border-left: 3px solid #ffd700;
+    }
+    .nav-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 15px;
+    }
+    .nav-btn {
+      background: rgba(255, 215, 0, 0.15);
+      color: #ffd700;
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      padding: 8px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: rgba(255, 215, 0, 0.3);
+      transform: translateY(-1px);
+    }
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .slide-counter {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container" style="max-width: 480px;">
+    <div class="card">
+      <div class="card-header" style="margin-bottom: 5px;">
+        <h1>✨ 100 Things About You ✨</h1>
+        <p>A celebration of who you are, Ayane</p>
+      </div>
+
+      <div class="slide-container">
+        <!-- Slide 1 (1-10) -->
+        <div class="slide active" data-slide="0">
+          <h3>Part 1: Your Inner Light</h3>
+          <ul class="trait-list">
+            <li>1. Your genuinely kind heart toward everyone</li>
+            <li>2. How your laughter instantly changes the room's mood</li>
+            <li>3. Your quiet strength during tough moments</li>
+            <li>4. The way you listen without interrupting</li>
+            <li>5. Your infectious positive energy</li>
+            <li>6. How thoughtfully you remember the little things</li>
+            <li>7. Your brilliant and creative imagination</li>
+            <li>8. The way you find joy in simple everyday moments</li>
+            <li>9. Your unwavering honesty and integrity</li>
+            <li>10. How comfortable people feel around you</li>
+          </ul>
+        </div>
+
+        <!-- Slide 2 (11-20) -->
+        <div class="slide" data-slide="1">
+          <h3>Part 2: Your Character</h3>
+          <ul class="trait-list">
+            <li>11. Your patience when things don't go as planned</li>
+            <li>12. The passion you put into your hobbies</li>
+            <li>13. How gracefully you handle unexpected challenges</li>
+            <li>14. Your empathy for animals and nature</li>
+            <li>15. The supportive friend you always turn out to be</li>
+            <li>16. Your modesty despite how talented you are</li>
+            <li>17. How courageously you stand up for what's right</li>
+            <li>18. Your beautiful perspective on life</li>
+            <li>19. The warmth behind your smile</li>
+            <li>20. Your willingness to learn and grow every day</li>
+          </ul>
+        </div>
+
+        <!-- Slide 3 (21-30) -->
+        <div class="slide" data-slide="2">
+          <h3>Part 3: The Little Things</h3>
+          <ul class="trait-list">
+            <li>21. The adorable way you get excited about things</li>
+            <li>22. Your clever sense of humor and wit</li>
+            <li>23. How cozy and safe your presence feels</li>
+            <li>24. Your dedication to the goals you set</li>
+            <li>25. The comforting words you offer when someone is down</li>
+            <li>26. Your cute quirks and mannerisms</li>
+            <li>27. How deeply you care about the people you love</li>
+            <li>28. Your refreshing authenticity—never pretending</li>
+            <li>29. The creative solutions you come up with</li>
+            <li>30. Your ability to find humor on stressful days</li>
+          </ul>
+        </div>
+
+        <!-- Slide 4 (31-40) -->
+        <div class="slide" data-slide="3">
+          <h3>Part 4: Your Mind & Spirit</h3>
+          <ul class="trait-list">
+            <li>31. Your sharp intelligence and curiosity</li>
+            <li>32. How deeply you think about the world</li>
+            <li>33. Your open-mindedness toward new ideas</li>
+            <li>34. The peaceful vibe you carry around</li>
+            <li>35. Your artistic and aesthetic taste</li>
+            <li>36. How forgiving and understanding you are</li>
+            <li>37. The sparkle in your eyes when you talk about your passions</li>
+            <li>38. Your fierce independence paired with sweetness</li>
+            <li>39. How you inspire people to be better versions of themselves</li>
+            <li>40. Your ability to keep secrets safe</li>
+          </ul>
+        </div>
+
+        <!-- Slide 5 (41-50) -->
+        <div class="slide" data-slide="4">
+          <h3>Part 5: Everyday Magic</h3>
+          <ul class="trait-list">
+            <li>41. The way you make ordinary days feel special</li>
+            <li>42. Your wonderful taste in music and media</li>
+            <li>43. How resilient you are after setbacks</li>
+            <li>44. Your polite and respectful manners</li>
+            <li>45. The comfort of your text messages</li>
+            <li>46. Your intuition about people's feelings</li>
+            <li>47. How hardworking you are behind the scenes</li>
+            <li>48. Your cute expressions when you concentrate</li>
+            <li>49. The gentle way you offer advice</li>
+            <li>50. Your wonderful dreams for the future</li>
+          </ul>
+        </div>
+
+        <!-- Slide 6 (51-60) -->
+        <div class="slide" data-slide="5">
+          <h3>Part 6: Pure Positivity</h3>
+          <ul class="trait-list">
+            <li>51. Your ability to turn a bad day around</li>
+            <li>52. How you notice beauty where others don't</li>
+            <li>53. Your infectious enthusiasm for new adventures</li>
+            <li>54. The warmth of your hugs or greetings</li>
+            <li>55. Your trust and loyalty</li>
+            <li>56. How nicely you treat people who can do nothing for you</li>
+            <li>57. Your emotional intelligence and maturity</li>
+            <li>58. The funny jokes you randomly drop</li>
+            <li>59. Your calming voice</li>
+            <li>60. How proudly you stay true to yourself</li>
+          </ul>
+        </div>
+
+        <!-- Slide 7 (61-70) -->
+        <div class="slide" data-slide="6">
+          <h3>Part 7: Unmatched Charm</h3>
+          <ul class="trait-list">
+            <li>61. Your adorable laugh when something is truly funny</li>
+            <li>62. How supportive you are of others' success</li>
+            <li>63. Your brilliant problem-solving mind</li>
+            <li>64. The cozy comfort of sharing silence with you</li>
+            <li>65. Your self-awareness and reflective nature</li>
+            <li>66. How brightly you shine in a crowd</li>
+            <li>67. Your unique perspective on art and stories</li>
+            <li>68. The sweet way you check up on people</li>
+            <li>69. Your adventurous spirit</li>
+            <li>70. How gracefully you accept compliments</li>
+          </ul>
+        </div>
+
+        <!-- Slide 8 (71-80) -->
+        <div class="slide" data-slide="7">
+          <h3>Part 8: Heart & Soul</h3>
+          <ul class="trait-list">
+            <li>71. Your deep appreciation for meaningful connections</li>
+            <li>72. How bravely you face difficult conversations</li>
+            <li>73. Your playful and mischievous side</li>
+            <li>74. The peace of mind you bring to others</li>
+            <li>75. Your refusal to judge people prematurely</li>
+            <li>76. How carefully you choose your words</li>
+            <li>77. The wonderful way you celebrate victories</li>
+            <li>78. Your beautiful soul that leaves a mark everywhere</li>
+            <li>79. How you make people feel valued and seen</li>
+            <li>80. Your timeless grace</li>
+          </ul>
+        </div>
+
+        <!-- Slide 9 (81-90) -->
+        <div class="slide" data-slide="8">
+          <h3>Part 9: Unforgettable Grace</h3>
+          <ul class="trait-list">
+            <li>81. Your commitment to growing into your best self</li>
+            <li>82. How comforting your presence is during chaos</li>
+            <li>83. Your creative flair in everyday things</li>
+            <li>84. The genuine interest you take in others' stories</li>
+            <li>85. Your ability to keep calm under pressure</li>
+            <li>86. How wonderfully unique your personality is</li>
+            <li>87. The sweet comfort of your friendship</li>
+            <li>88. Your bright outlook on tomorrow</li>
+            <li>89. How you naturally light up any space</li>
+            <li>90. Your wonderful sense of wonder</li>
+          </ul>
+        </div>
+
+        <!-- Slide 10 (91-100) -->
+        <div class="slide" data-slide="9">
+          <h3>Part 10: Simply You</h3>
+          <ul class="trait-list">
+            <li>91. Your inspiring dedication to your values</li>
+            <li>92. How effortlessly you bring happiness to my life</li>
+            <li>93. Your priceless reactions to surprises</li>
+            <li>94. The deep emotional safety of talking to you</li>
+            <li>95. Your gorgeous, one-of-a-kind personality</li>
+            <li>96. How unforgettable you make every shared memory</li>
+            <li>97. Your beautiful heart that deserves the world</li>
+            <li>98. The fact that there's nobody else quite like you</li>
+            <li>99. Just being entirely, wonderfully, beautifully you</li>
+            <li>100. And simply being the best part of my year! ❤️</li>
+          </ul>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="nav-controls">
+          <button id="prevBtn" class="nav-btn" disabled>⬅️ Previous</button>
+          <span id="slideCounter" class="slide-counter">Slide 1 of 10</span>
+          <button id="nextBtn" class="nav-btn">Next ➡️</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.slide');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const slideCounter = document.getElementById('slideCounter');
+      
+      let currentSlide = 0;
+      const totalSlides = slides.length;
+
+      function updateSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+
+        slideCounter.textContent = `Slide ${index + 1} of ${totalSlides}`;
+        prevBtn.disabled = index === 0;
+        
+        if (index === totalSlides - 1) {
+          nextBtn.textContent = "Finish 🎉";
+        } else {
+          nextBtn.textContent = "Next ➡️";
+        }
+      }
+
+      prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+          currentSlide--;
+          updateSlide(currentSlide);
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (currentSlide < totalSlides - 1) {
+          currentSlide++;
+          updateSlide(currentSlide);
+        } else {
+          // Redirects to the New Year video page upon completion
+          window.location.href = 'videos.html';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

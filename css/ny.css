@@ -1,0 +1,342 @@
+/* Import a festive font for the header */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Midnight sky background with a subtle festive glow */
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Deep midnight blue to black */
+  background: radial-gradient(circle at top right, #1b2735 0%, #090a0f 100%);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Optional: Add some pure CSS "stars" or confetti in the background */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #ffd700, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 50px 160px, #ffd700, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 130px 80px, #ffd700, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: twinkle 4s infinite linear;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+@keyframes twinkle {
+  0% { transform: translateY(0); opacity: 0.3; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(-50px); opacity: 0.3; }
+}
+
+.card-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  z-index: 1; /* Keep above the stars */
+}
+
+/* Elegant Gold Glassmorphism */
+.card {
+  background: rgba(15, 15, 20, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 215, 0, 0.3); /* Gold border */
+  border-radius: 20px;
+  padding: 35px 25px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 
+              0 0 20px rgba(255, 215, 0, 0.1) inset; /* Inner gold glow */
+}
+
+/* Shimmering Gold Text Effect */
+.card-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 10px;
+  
+  /* Gold metallic gradient */
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.card-header p {
+  font-size: 0.9rem;
+  text-align: center;
+  color: #c0c0c0; /* Silver text */
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+  color: #e5e7eb;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.input-group input,
+.input-group select {
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  appearance: none; 
+}
+
+/* Custom dropdown arrow (Gold) */
+.input-group select {
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFD700%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px top 50%;
+  background-size: 12px auto;
+}
+
+.input-group select option {
+  background-color: #090a0f;
+  color: #ffffff;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.input-group input[readonly] {
+  color: #ffd700; /* Make the date stand out in gold */
+  font-weight: 600;
+  opacity: 0.9;
+  cursor: default;
+}
+
+/* Animated Celebration Button */
+button {
+  width: 100%;
+  padding: 16px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #d4af37, #ffdf00, #d4af37);
+  background-size: 200% 200%;
+  color: #000000;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  animation: gradientBtn 3s ease infinite;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@keyframes gradientBtn {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(255, 223, 0, 0.6);
+}
+
+/* =========================================
+   CREEPY MODAL STYLES 
+   ========================================= */
+
+/* The dark, screen-covering overlay */
+.creepy-modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95); /* Pitch black overlay */
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+/* The creepy pop-up box */
+.creepy-modal-content {
+  background: #050505;
+  border: 1px solid #4a0000;
+  box-shadow: 0 0 30px #8b0000, inset 0 0 20px #300000;
+  padding: 50px 70px;
+  border-radius: 4px;
+  text-align: center;
+  position: relative;
+  /* Adds a subtle unsettling flicker */
+  animation: creepyFlicker 2s infinite; 
+}
+
+/* The cursed text */
+.creepy-modal-content h2 {
+  font-family: 'Courier New', Courier, monospace;
+  color: #ff0000;
+  font-size: 2.5rem;
+  letter-spacing: 8px;
+  text-transform: lowercase;
+  text-shadow: 2px 2px 10px #ff0000, -2px -2px 10px #8b0000;
+  margin: 0;
+  background: none;
+  -webkit-text-fill-color: #ff0000;
+  animation: none; /* Override the gold shine from earlier */
+}
+
+/* Close Button (an unassuming X in the corner) */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #333;
+  font-size: 24px;
+  font-family: sans-serif;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: #ff0000;
+  text-shadow: 0 0 10px #ff0000;
+}
+
+/* Keyframes for the eerie lighting flicker */
+@keyframes creepyFlicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { 
+    opacity: 1; 
+    box-shadow: 0 0 30px #8b0000, inset 0 0 20px #300000; 
+  }
+  20%, 22%, 24%, 55% { 
+    opacity: 0.8; 
+    box-shadow: 0 0 5px #4a0000; 
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* =========================================
+   MELLOW MODAL STYLES (Wrong Password)
+   ========================================= */
+
+/* The soft, calming overlay */
+.mellow-modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(230, 235, 240, 0.7); /* Soft light grayish-blue */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  animation: fadeInMellow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* The gentle pop-up box */
+.mellow-modal-content {
+  background: #ffffff;
+  border: none;
+  border-radius: 24px;
+  padding: 40px 50px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(160, 175, 190, 0.3);
+  max-width: 350px;
+  width: 90%;
+}
+
+/* Soothing text styles */
+.mellow-modal-content h2 {
+  font-family: 'Poppins', sans-serif;
+  color: #8fa3b5; /* Soft pastel blue-grey */
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  text-shadow: none;
+  background: none;
+  -webkit-text-fill-color: initial;
+  animation: none; /* Override gold shine */
+  margin-bottom: 12px;
+}
+
+.mellow-modal-content p {
+  font-family: 'Poppins', sans-serif;
+  color: #b0bec5;
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+/* Specific close button for mellow modal */
+.mellow-close {
+  color: #cfd8dc;
+  font-size: 28px;
+  font-weight: 300;
+}
+
+.mellow-close:hover {
+  color: #8fa3b5;
+  text-shadow: none;
+}
+
+/* Smooth, floating entrance animation */
+@keyframes fadeInMellow {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px) scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
